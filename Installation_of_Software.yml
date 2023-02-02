@@ -1,0 +1,4 @@
+---
+- hosts: 192.168.90.94
+  roles:
+  - install_softwares
