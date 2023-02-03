@@ -13,3 +13,9 @@
     product_id: Mcafee
     state: present
     arguements: "/install=agent /customprops1=vseinit /silent"
+
+- name: Uninstall Mcafee
+  win_package:
+    path: C:\agent\FramePkg.exe
+    product_id: Mcafee
+    state: absent
