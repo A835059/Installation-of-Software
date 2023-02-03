@@ -1,0 +1,3 @@
+---
+# vars file for install-mcafee
+binary_location: /var/data/win-binary/FramePkg/FramePkg.exe
