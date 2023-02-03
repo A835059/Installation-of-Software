@@ -1,0 +1,15 @@
+---
+# tasks file for install-mcafee
+- name: Before installing Mcafee, lets copy the binary
+  win_copy:
+    src: "{{ binary_location }}"
+    dest: C:\agent\FramePkg.exe
+  ignore_errors: yes  
+
+
+- name: Running execution
+  win_package:
+    path: C:\agent\FramePkg.exe
+    product_id: Mcafee
+    state: present
+    arguements: "/install=agent /customprops1=vseinit /silent"
