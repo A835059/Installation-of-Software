@@ -1,21 +1,31 @@
 ---
-# tasks file for install-mcafee
-- name: Before installing Mcafee, lets copy the binary
+# tasks file for installing packages
+
+- name: Uninstall existing package
+  win_shell: Get-AppxPackage {{packager_name}} | Remove-AppxPackage
+  ignore_errors: yes
+  #newrelic-infra
+
+  
+- name: Copy package on server
   win_copy:
-    src: "{{ binary_location }}"
-    dest: C:\agent\FramePkg.exe
-  ignore_errors: yes  
+    src: "{{ item }}"
+    dest: C:\Users\Administrator\Desktop\Scripts
+  register: copy_package
+  with_items:
+    - "{{ scripts }}"
 
 
-- name: Running execution
+- name: Install the package
   win_package:
-    path: C:\agent\FramePkg.exe
+    path: C:\Users\Administrator\Desktop\Scripts
     product_id: Mcafee
     state: present
-    arguements: "/install=agent /customprops1=vseinit /silent"
+  #  arguements: "/install=agent /customprops1=vseinit /silent"
 
-- name: Uninstall Mcafee
+
+- name: Uninstall the installer
   win_package:
-    path: C:\agent\FramePkg.exe
+    path: C:\Users\Administrator\Desktop\Scripts
     product_id: Mcafee
     state: absent
